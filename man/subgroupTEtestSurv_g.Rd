@@ -2,8 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{subgroupTEtestSurv_g}
 \alias{subgroupTEtestSurv_g}
-\title{Test for censored data. Users can specify the values of the g function for each observation. 
-The f function is estimated using a working AFT model. Note that the follow-up time is on the log scale.}
+\title{Test for censored data (user-specified g).}
 \usage{
 subgroupTEtestSurv_g(x, xu, y, dlt, tr, g, B)
 }
@@ -24,13 +23,13 @@ based on the jth partition.}
 
 \item{g}{A vector containing the values of g.}
 
-\item{B}{An integer of the number of bootstrap samples}
+\item{B}{An integer of the number of bootstrap samples.}
 }
 \value{
 The p value of the test.
 }
 \description{
-Test for censored data. Users can specify the values of the g function for each observation. 
+Users can specify the values of the g function for each observation. 
 The f function is estimated using a working AFT model. Note that the follow-up time is on the log scale.
 }
 \examples{
@@ -38,10 +37,10 @@ set.seed(2)
 N <- 800
 beta <- rep(0,length = 50)
 beta[1] <- 1
-beta[P] <- -1
-X <- matrix(rnorm(N*P), ncol = P)
+beta[50] <- -1
+X <- matrix(rnorm(N*50), ncol = 50)
 TR <- rbinom(N, 1, 0.5)
-Y0 <-  X \%*\% beta + TR*0.25*(2*(X[,1]>0 | X[,25]>0)-1)+ rnorm(N, sd = 0.5)
+Y0 <-  X \%*\% beta + TR*0.5*(2*(X[,1]>0 | X[,25]>0)-1)+ rnorm(N, sd = 0.5)
 Y0 <- as.vector(Y0)
 C <- log(rexp(N, 0.1))
 Y <- pmin(Y0,C)

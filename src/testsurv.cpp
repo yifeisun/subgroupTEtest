@@ -60,7 +60,9 @@ double logrank(arma::uvec& ind,
   return nu/n/n;
 }
 
-//' Test for censored data. The functions f and g use the same pre-specified set of covariates 
+//' Test for censored data (same covariates in f and g). 
+//' 
+//' The functions f and g use the same pre-specified set of covariates 
 //' and are estimated from working AFT models. Note that the follow-up time is on the log scale.
 //' 
 //' @param x A numeric matrix of covariates to be used in f and g. 
@@ -284,7 +286,9 @@ double subgroupTEtestSurv(arma::mat& x,
   return  arma::sum(thetaBsd > ts)*1.0/B;
 }
 
-//' Test for censored data. Users can specify the values of the g function for each observation. 
+//' Test for censored data (user-specified g). 
+//' 
+//' Users can specify the values of the g function for each observation. 
 //' The f function is estimated using a working AFT model. Note that the follow-up time is on the log scale.
 //' 
 //' @param x A numeric matrix of covariates to be used in f.

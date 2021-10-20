@@ -2,8 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{subgroupTEtestSurv}
 \alias{subgroupTEtestSurv}
-\title{Test for censored data. The functions f and g use the same pre-specified set of covariates 
-and are estimated from working AFT models. Note that the follow-up time is on the log scale.}
+\title{Test for censored data (same covariates in f and g).}
 \usage{
 subgroupTEtestSurv(x, xu, y, dlt, tr, B)
 }
@@ -28,7 +27,7 @@ based on the jth partition.}
 The p value of the test.
 }
 \description{
-Test for censored data. The functions f and g use the same pre-specified set of covariates 
+The functions f and g use the same pre-specified set of covariates 
 and are estimated from working AFT models. Note that the follow-up time is on the log scale.
 }
 \examples{

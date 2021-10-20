@@ -1,6 +1,6 @@
 \name{subgroupTEtest-package}
 \alias{subgroupTEtest-package}
-\alias{subgroupTEtest}
+
 \docType{package}
 \title{
 \packageTitle{subgroupTEtest}
@@ -13,8 +13,8 @@
 The DESCRIPTION file:
 \packageDESCRIPTION{subgroupTEtest}
 \packageIndices{subgroupTEtest}
-~~ An overview of how to use the package, ~~
-~~ including the most important functions ~~
+The package implements the tests proposed in "An Omnibus Test for Detection of SubgroupTreatment Effects via Data Partitioning".
+The test for censored data depends on the package "faft", which implements the fast censored linear regression in Huang, Y. (2013) Fast censored linear regression. Scandinavian Journal of Statistics 40, 789--806. The package "faft" is not available on CRAN but can be downloaded from Dr. Huang's personal website.
 }
 \author{
 \packageAuthor{subgroupTEtest}

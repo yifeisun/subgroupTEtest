@@ -27,11 +27,14 @@ using namespace Rcpp;
 //' TR <- rbinom(N, 1, 0.5)
 //' Y <-  X %*% beta + TR*0.5*(2*(X[,1]>0 | X[,25]>0)-1)+ rnorm(N, sd = 0.5)
 //'   
-//' # partitions
+//' # partition matrix
 //' X2 <- apply(X,2,function(u) (u<0)+1)
+//' # covariates in f
 //' X1 <- X[,c(1,25,50)]
 //' # p-value (g = 0)
 //' subgroupTEtest(X2,Y,TR,X1,rep(0,N),1000)
+//' 
+//' # estimate g from a working linear model
 //' fitg <- lm(Y~X1*TR)
 //' G <- cbind(TR,TR*X1) %*% coef(fitg)[5:8]
 //' subgroupTEtest(X2,Y,TR,X1,G,1000)

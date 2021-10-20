@@ -20,6 +20,8 @@ based on the jth partition.}
 \item{fx}{A numeric matrix of covariates to be used in f.}
 
 \item{g}{A vector containing the values of g.}
+
+\item{B}{An integer of the number of bootstrap samples.}
 }
 \value{
 The p value of the test.
@@ -28,27 +30,24 @@ The p value of the test.
 Test for uncensored data
 }
 \examples{
-library(glmnet)
 set.seed(1)
 N <- 800
-P <- 50
-beta <- rep(0,length = P)
+beta <- rep(0,length = 50)
 beta[1] <- 1
-beta[P] <- -1
-X <- matrix(rnorm(N*P), ncol = P)
+beta[50] <- -1
+X <- matrix(rnorm(N*50), ncol = 50)
 TR <- rbinom(N, 1, 0.5)
-Y <-  X \%*\% beta + TR*0.25*(2*(X[,1]>0 | X[,25]>0)-1)+ rnorm(N, sd = 0.5)
+Y <-  X \%*\% beta + TR*0.5*(2*(X[,1]>0 | X[,25]>0)-1)+ rnorm(N, sd = 0.5)
   
-# partitions
+# partition matrix
 X2 <- apply(X,2,function(u) (u<0)+1)
-# select variables in f
-flasso <- glmnet(y = Y, x = X)
-fbeta <- coef(flasso, s = 0.025)
-X3 <- X[,fbeta[2:(P+1)]!=0]
-# calculate g
-glasso <- glmnet(y = Y, x = cbind(X,TR*X,TR))
-gbeta <- coef(glasso, s = 0.05)[(P+2):(2*P+2)]
-g <- cbind(TR*X,TR) \%*\% gbeta
-# p-value
-subgroupTEtest(X2,Y,TR,X3,g)
+# covariates in f
+X1 <- X[,c(1,25,50)]
+# p-value (g = 0)
+subgroupTEtest(X2,Y,TR,X1,rep(0,N),1000)
+
+# estimate g from a working linear model
+fitg <- lm(Y~X1*TR)
+G <- cbind(TR,TR*X1) \%*\% coef(fitg)[5:8]
+subgroupTEtest(X2,Y,TR,X1,G,1000)
 }
